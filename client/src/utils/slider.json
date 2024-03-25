@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Aliva Priva Niwas",
+    "price": "47,043",
+    "detail": "This beautiful House is for sale with a great view. Samakhushi, Kathmandu",
+    "image": "./r1.png"
+  },
+  {
+    "name": "Asatti Garden House",
+    "price": "66,353",
+    "detail": "This beautiful House is for sale with a great view. Thamel, Kathmandu",
+    "image": "./r2.png"
+  },
+  {
+    "name": "Citralan Puri Villa",
+    "price": "35,853",
+    "detail": "This beautiful House is for sale with a great view. Budhanilakantha, Kathmandu",
+    "image": "./r3.png"
+  },
+  {
+    "name": "Aliva Priva Niwas",
+    "price": "47,043",
+    "detail": "This beautiful House is for sale with a great view. Samakhushi, Kathmandu",
+    "image": "./r1.png"
+  },
+  {
+    "name": "Asatti Garden House",
+    "price": "66,353",
+    "detail": "This beautiful House is for sale with a great view. Thamel, Kathmandu",
+    "image": "./r2.png"
+  },
+  {
+    "name": "Citralan Puri Villa",
+    "price": "35,853",
+    "detail": "This beautiful House is for sale with a great view. Budhanilakantha, Kathmandu",
+    "image": "./r3.png"
+  }
+]
