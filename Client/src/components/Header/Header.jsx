@@ -5,10 +5,19 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
+import AddPropertyModal from "../AddPropertyModal/AddPropertyModal";
+import useAuthCheck from "../../hooks/useAuthCheck.jsx";
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
+  const [modalOpened, setModalOpened] = useState(false);
   const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+  const validateLogin = useAuthCheck();
+  const handleAddPropertyClick = () => {
+    if (validateLogin()) {
+      setModalOpened(true);
+    }
+  };
 
   const getMenuStyles = (menuOpened) => {
     if (document.documentElement.clientWidth <= 800) {
@@ -32,9 +41,19 @@ const Header = () => {
             className="h-menu flexCenter Text"
             style={getMenuStyles(menuOpened)}
           >
-            <NavLink to="/properties">Properties</NavLink>
+            <div className="properties-link">
+              <NavLink to="/properties">Properties</NavLink>
+            </div>
 
-            <a href="mailto:sherchankrish2715@gmail.com">Contact</a>
+            {/* Add property button */}
+            <div className="add-property-link">
+              <div onClick={handleAddPropertyClick}>Add Property</div>
+            </div>
+            <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
+
+            <div className="contact-link">
+              <a href="mailto:sherchankrish2715@gmail.com">Contact</a>
+            </div>
 
             {/* login button */}
             {!isAuthenticated ? (

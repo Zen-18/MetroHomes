@@ -7,18 +7,18 @@ import { MantineProvider } from "@mantine/core";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Auth0Provider
-      domain="dev-7bh3g7wrkxtwau6x.us.auth0.com"
-      clientId="E6aBojn9olTIOYNXOGbJRnQmoV1x4pMU"
-      authorizationParams={{
-        redirect_uri: "http://localhost:5173/",
-      }}
-      audience="http://localhost:8000"
-      scope="openid profile email"
-    >
-      <MantineProvider>
+    <MantineProvider>
+      <Auth0Provider
+        domain="dev-7bh3g7wrkxtwau6x.us.auth0.com"
+        clientId="E6aBojn9olTIOYNXOGbJRnQmoV1x4pMU"
+        authorizationParams={{
+          redirect_uri: "http://localhost:5173/",
+        }}
+        audience="http://localhost:8000"
+        scope="openid profile email"
+      >
         <App />
-      </MantineProvider>
-    </Auth0Provider>
+      </Auth0Provider>
+    </MantineProvider>
   </React.StrictMode>
 );

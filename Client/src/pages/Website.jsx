@@ -11,9 +11,9 @@ const Website = () => {
       <div>
         <Hero />
         <div>
-          <Companies />
           <Residencies />
           <Value />
+          <Companies />
           <GetStarted />
         </div>
       </div>

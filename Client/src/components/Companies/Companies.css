@@ -1,9 +1,29 @@
-.c-container {
-    justify-content: space-around;
-    gap: 1rem;
-    background-color: white;
+.head {
+    margin-top: 10px;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.148);
+    padding-top: 1.5rem;
+    width: 60%;
+    margin-left: auto;
+  margin-right: auto;
 }
 
-.c-container>img {
-    width: 9rem;
-}
+.c-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .line1,
+  .line2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .line1 img,
+  .line2 img {
+    width: calc(30% - 50px); 
+    margin: 5px;
+    margin-right: 100px;
+    margin-left: 100px;
+    box-sizing: border-box;
+  }

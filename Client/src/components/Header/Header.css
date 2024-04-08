@@ -30,13 +30,18 @@
     font-weight: 500;
 }
 
+.contact-link a,
+.add-property-link div,
+.properties-link a { 
+    font-size: 1.2rem;
+}
+
 @media (max-width: 768px) {
     .menu-icon {
         display: block;
     }
 
     .h-menu {
-        z-index: 99;
         color: var(--black);
         position: absolute;
         top: 3rem;

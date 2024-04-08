@@ -1,3 +1,6 @@
+.r-wrapper{
+  padding-top: 2rem;
+}
 .r-container {
   gap: 2rem;
   position: relative;

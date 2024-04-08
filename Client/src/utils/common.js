@@ -17,3 +17,7 @@ export const sliderSettings = {
     },
   
   };
+
+export const validateString = (value) => {
+  return value?.length < 5 || value === null? "Must have atleast 5 characters": null;
+}

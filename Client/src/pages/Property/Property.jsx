@@ -17,6 +17,8 @@ const Property = () => {
     getProperty(id)
   );
 
+  console.log(data);
+
   if (isLoading) {
     return (
       <div className="wrapper">
