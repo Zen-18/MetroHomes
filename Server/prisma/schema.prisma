@@ -11,6 +11,7 @@ model User {
     id               String      @id @default(auto()) @map("_id") @db.ObjectId
     name             String?
     email            String      @unique
+    password         String
     image            String?
     bookedVisits     Json[]
     favResidenciesID String[]    @db.ObjectId
@@ -28,7 +29,7 @@ model Residency {
     image       String
     facilities  Json
     userEmail   String
-    owner       User     @relation("Owner", fields: [userEmail], references: [email])
+    owner       User?    @relation("Owner", fields: [userEmail], references: [email])
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 

@@ -1,10 +1,10 @@
 import express from 'express'
-import { bookVisit, cancelBooking, createUser, getAllBookings, getAllFavorites, toFav } from "../controllers/userController.js"
-import jwtCheck from '../Config/auth0Config.js'
+import { bookVisit, cancelBooking, createUser, loginUser, getAllBookings, getAllFavorites, toFav } from "../controllers/userController.js"
 
 const router = express.Router()
 
-router.post("/register", jwtCheck, createUser)
+router.post("/login", loginUser)
+router.post("/register", createUser)
 router.post("/bookVisit/:id", bookVisit)
 router.post("/allBookings", getAllBookings)
 router.post("/removeBookings/:id", cancelBooking)

@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         authorizationParams={{
           redirect_uri: "http://localhost:5173/",
         }}
-        audience="http://localhost:8000"
+        audience="http://localhost:3000"
         scope="openid profile email"
       >
         <App />
