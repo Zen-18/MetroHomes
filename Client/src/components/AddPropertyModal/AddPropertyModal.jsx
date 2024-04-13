@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Container, Modal, Stepper } from "@mantine/core";
 import AddLocation from "../AddLocation/AddLocation";
-import { useAuth0 } from "@auth0/auth0-react";
 import UploadImage from "../UploadImage/UploadImage";
 import BasicDetails from "../BasicDetails/BasicDetails";
 import Facilities from "../Facilities/Facilities";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const AddPropertyModal = ({ opened, setOpened }) => {
   const [active, setActive] = useState(0);
   const handleClose = () => {
     setOpened(false);
   };
-  const { user } = useAuth0();
+  const { user } = useAuthContext();
 
   const [propertyDetails, setPropertyDetails] = useState({
     title: "",
@@ -26,7 +26,7 @@ const AddPropertyModal = ({ opened, setOpened }) => {
       parkings: 0,
       bathrooms: 0,
     },
-    userEmail: user?.email,
+    email: user?.email,
   });
 
   const nextStep = () => {
@@ -76,9 +76,9 @@ const AddPropertyModal = ({ opened, setOpened }) => {
           <Stepper.Step>
             <Facilities
               prevStep={prevStep}
-              nextStep={nextStep}
               propertyDetails={propertyDetails}
               setPropertyDetails={setPropertyDetails}
+              setActiveStep={setActive}
             />
           </Stepper.Step>
           <Stepper.Completed>

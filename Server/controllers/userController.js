@@ -1,27 +1,76 @@
 import asyncHandler from 'express-async-handler'
 import { prisma } from "../Config/prismaConfig.js" 
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 
+const createToken = (_id) => {
+  return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
+}
 // function to login
-export const loginUser = asyncHandler(async (req, res)=> {
-  res.send({message: "User login successfull"})
-})
+export const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Find user by email using Prisma
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: { id: true, email: true, password: true }, // Only select necessary fields
+    });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    // Validate password using a secure hashing algorithm (bcrypt recommended)
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+    const isAdmin = user.email === "Krish78@gmail.com"; // Change "your@admin.email" to your desired admin email
+
+
+    // Create a JWT token (consider using a library like jsonwebtoken)
+    const token = createToken(user.id); // Pass user ID for token payload
+
+    res.status(200).json({ email, token, isAdmin }); 
+  } catch (error) {
+    console.error(error); // Log the error for debugging
+    res.status(500).json({ error: 'Internal server error' }); // Generic error for client
+  }
+});
 
 // function to sign up a user
-export const createUser = asyncHandler(async(req, res) => {
-    console.log("creating a user");
+export const createUser = async (req, res) => {
+  const { email, password } = req.body;
 
-    let {email} = req.body;
-    const userExists = await prisma.user.findUnique({where: {email: email}})
-    if (!userExists) {
-        
-        const user = await prisma.user.create({data: req.body})
-        res.send({
-            message: "User registered successfully",
-            user: user,
-        })
+  try {
+    // Check for existing user with the same email
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already in use' });
     }
-    else res.status(201).send({message: "User already registered"})
-})
+
+    // Hash the password using a secure hashing algorithm (bcrypt recommended)
+    const hashedPassword = await bcrypt.hash(password, 12); // Adjust cost factor as needed
+
+    // Create a new user using Prisma
+    const user = await prisma.user.create({
+      data: { email, password: hashedPassword },
+    });
+
+    // Create a JWT token (consider using a library like jsonwebtoken)
+    const token = createToken(user.id); // Pass user ID for token payload
+
+    res.status(201).json({ email, token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 // function to book a visit to resd
 export const bookVisit = asyncHandler(async (req, res) => {

@@ -10,6 +10,7 @@ const ProfileMenu = ({ user, logout }) => {
       </Menu.Target>
 
       <Menu.Dropdown>
+        <Menu.Item>{user.email}</Menu.Item>
         <Menu.Item>Favourites</Menu.Item>
         <Menu.Item>Bookings</Menu.Item>
         <Menu.Item

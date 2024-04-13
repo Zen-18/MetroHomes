@@ -52,7 +52,7 @@ const AddLocation = ({ propertyDetails, setPropertyDetails, nextStep }) => {
         <div className="flexColStart">
           <Select
             w={"100%"}
-            withAstersk
+            withAsterisk
             label="Country"
             clearable
             searchable
@@ -61,13 +61,13 @@ const AddLocation = ({ propertyDetails, setPropertyDetails, nextStep }) => {
           />
           <TextInput
             w={"100%"}
-            withAstersk
+            withAsterisk
             label="City"
             {...form.getInputProps("city", { type: "input" })}
           />
           <TextInput
             w={"100%"}
-            withAstersk
+            withAsterisk
             label="Address"
             {...form.getInputProps("address", { type: "input" })}
           />

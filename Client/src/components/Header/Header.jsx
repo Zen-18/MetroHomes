@@ -1,28 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { BiMenuAltRight } from "react-icons/bi";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Link, NavLink } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import AddPropertyModal from "../AddPropertyModal/AddPropertyModal";
-import useAuthCheck from "../../hooks/useAuthCheck.jsx";
+import { useLogout } from "../../hooks/useLogout.jsx";
+import { useAuthContext } from "../../hooks/useAuthContext.jsx";
+import ProfileMenu from "../ProfileMenu/ProfileMenu.jsx";
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
-  const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
-  const validateLogin = useAuthCheck();
-  const handleAddPropertyClick = () => {
-    if (validateLogin()) {
-      setModalOpened(true);
+  const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
+
+  const { validateLogin, user, updateUser, state } = useAuthContext();
+
+  useEffect(() => {
+    if (user && user.isAdmin) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
     }
+  }, [user]);
+
+  const handleAddPropertyClick = () => {
+    setModalOpened(true);
   };
+
+  console.log("user", user);
 
   const getMenuStyles = (menuOpened) => {
     if (document.documentElement.clientWidth <= 800) {
       return { right: !menuOpened && "-100%" };
     }
+  };
+
+  const { logout } = useLogout();
+
+  const handleClick = () => {
+    logout();
   };
 
   return (
@@ -46,9 +62,11 @@ const Header = () => {
             </div>
 
             {/* Add property button */}
-            <div className="add-property-link">
-              <div onClick={handleAddPropertyClick}>Add Property</div>
-            </div>
+            {isAdmin && user && (
+              <div className="add-property-link">
+                <div onClick={handleAddPropertyClick}>Add Property</div>
+              </div>
+            )}
             <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
 
             <div className="contact-link">
@@ -56,12 +74,14 @@ const Header = () => {
             </div>
 
             {/* login button */}
-            {!isAuthenticated ? (
-              <button className="button" onClick={loginWithRedirect}>
-                Login
-              </button>
+            {user ? (
+              <div>
+                <ProfileMenu user={user} logout={logout} />
+              </div>
             ) : (
-              <ProfileMenu user={user} logout={logout} />
+              <div className="button">
+                <Link to="/login">Login</Link>
+              </div>
             )}
           </div>
         </OutsideClickHandler>

@@ -54,12 +54,20 @@ export const createUser = async (email, token) => {
 };
 
 export const createResidency = async (data, token) => {
-    console.log(data)
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.email) {
+        throw new Error("User email not found in localStorage");
+    }
+
+    const email = user.email;
     try{
       const res = await api.post(
         `/residency/create`,
         {
-          data
+          data,
+          owner: {connect: {email} },
         },
         {
           headers: {

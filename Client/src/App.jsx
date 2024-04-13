@@ -1,17 +1,21 @@
 import { Suspense, useState } from "react";
 import "./App.css";
-import Website from "./pages/Website";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import Properties from "./pages/Properties/Properties";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ReactQueryDevtools } from "react-query/devtools";
-import Property from "./pages/Property/Property";
 import UserDetailContext from "./Context/UserDetailContext";
+import { useAuthContext } from "./hooks/useAuthContext";
+import Layout from "./components/layout/Layout";
+import Website from "./pages/Website";
+import Properties from "./pages/Properties/Properties";
+import Property from "./pages/Property/Property";
+import Login from "./pages/Login-Signup/Login";
+import Signup from "./pages/Login-Signup/Signup";
 
 function App() {
+  const { user } = useAuthContext();
   const queryClient = new QueryClient();
   const [userDetails, setUserDetails] = useState({
     favourites: [],
@@ -25,6 +29,19 @@ function App() {
         <BrowserRouter>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
+              {/* Routes without Layout */}
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" replace={true} />}
+              />
+              <Route
+                path="/signup"
+                element={
+                  !user ? <Signup /> : <Navigate to="/" replace={true} />
+                }
+              />
+
+              {/* Routes with Layout */}
               <Route element={<Layout />}>
                 <Route path="/" element={<Website />} />
                 <Route path="/properties">
