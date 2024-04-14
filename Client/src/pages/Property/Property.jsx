@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
-import { getProperty } from "../../utils/api";
+import { BiMenuAltRight } from "react-icons/bi";
+import { deleteProperty, getProperty, updateResidency } from "../../utils/api"; // Import updateResidency
 import { PuffLoader } from "react-spinners";
 import { AiFillHeart, AiTwotoneCar } from "react-icons/ai";
 import "./Property.css";
+import { useMutation } from "react-query";
 import { MdLocationPin, MdMeetingRoom } from "react-icons/md";
 import { FaShower } from "react-icons/fa";
 import Map from "../../components/Map/Map";
+import ShowUpdateModal from "../../components/ShowPropertyUpdate/ShowPropertyUpdate";
 
 const Property = () => {
+  const [modalOpened, setModalOpened] = useState(false);
   const { pathname } = useLocation();
   const id = pathname.split("/").slice(-1)[0];
 
@@ -17,7 +21,33 @@ const Property = () => {
     getProperty(id)
   );
 
+  const getMenuStyles = (menuOpened) => {
+    if (document.documentElement.clientWidth <= 800) {
+      return { right: !menuOpened && "-100%" };
+    }
+  };
+
+  const [updatedData, setUpdatedData] = useState({}); // State to hold updated data
+
+  const { mutate: deleteMutation, isLoading: isDeleting } = useMutation(
+    deleteProperty,
+    {
+      onSuccess: () => {
+        // Redirect to the homepage after successful deletion
+        window.location.href = "/properties";
+      },
+    }
+  );
+
   console.log(data);
+
+  const handleDelete = () => {
+    deleteMutation(id);
+  };
+
+  const handleUpdate = () => {
+    setModalOpened(true);
+  };
 
   if (isLoading) {
     return (
@@ -57,7 +87,7 @@ const Property = () => {
             <div className="flexStart head">
               <span className="primaryText">{data?.title}</span>
               <span className="orangeText" style={{ fontSize: "1.5rem" }}>
-                Rs{data?.price}
+                Rs {data?.price}
               </span>
             </div>
 
@@ -92,6 +122,24 @@ const Property = () => {
 
             {/* Booking Button */}
             <button className="button">Book your Visit</button>
+
+            <div className="button-container">
+              <button
+                className="button button1"
+                style={{ background: "red" }}
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+              <button className="button button1">
+                <div onClick={handleUpdate}>Update</div>
+              </button>
+
+              <ShowUpdateModal
+                opened={modalOpened}
+                setOpened={setModalOpened}
+              />
+            </div>
           </div>
 
           {/* right */}

@@ -13,6 +13,8 @@ import Properties from "./pages/Properties/Properties";
 import Property from "./pages/Property/Property";
 import Login from "./pages/Login-Signup/Login";
 import Signup from "./pages/Login-Signup/Signup";
+import { VerifyEmail } from "./pages/VerifyEmail";
+import { Message } from "./pages/message";
 
 function App() {
   const { user } = useAuthContext();
@@ -34,12 +36,8 @@ function App() {
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" replace={true} />}
               />
-              <Route
-                path="/signup"
-                element={
-                  !user ? <Signup /> : <Navigate to="/" replace={true} />
-                }
-              />
+              <Route path="/signup" element={user ? <Message /> : <Signup />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
 
               {/* Routes with Layout */}
               <Route element={<Layout />}>

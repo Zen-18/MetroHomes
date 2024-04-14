@@ -22,6 +22,7 @@ const Login = () => {
 
         <label>Email:</label>
         <input
+          className="input"
           type="email"
           placeholder="E-mail Address"
           onChange={(e) => setEmail(e.target.value)}
@@ -29,6 +30,7 @@ const Login = () => {
         />
         <label>Password:</label>
         <input
+          className="input"
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}

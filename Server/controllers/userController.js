@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler'
 import { prisma } from "../Config/prismaConfig.js" 
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import crypto from 'crypto'
 
 const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
@@ -31,7 +32,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
 
     // Create a JWT token (consider using a library like jsonwebtoken)
-    const token = createToken(user.id); // Pass user ID for token payload
+    const token = createToken(user._id); // Pass user ID for token payload
 
     res.status(200).json({ email, token, isAdmin }); 
   } catch (error) {
@@ -59,7 +60,7 @@ export const createUser = async (req, res) => {
 
     // Create a new user using Prisma
     const user = await prisma.user.create({
-      data: { email, password: hashedPassword },
+      data: { email, password: hashedPassword, emailToken: crypto.randomBytes(64).toString("hex"), isVerified: false },
     });
 
     // Create a JWT token (consider using a library like jsonwebtoken)
@@ -195,3 +196,34 @@ export const toFav = asyncHandler(async (req, res) => {
       throw new Error(err.message);
     }
   });
+
+  //verify email
+  export const verifyEmail = async (req, res) => {
+    try{
+      const emailToken = req.body.emailToken;
+
+      if (!emailToken) return res.status(404).json("EmailToken not found....")
+
+      const user = await prisma.user.findUnique({emailToken})
+
+      if (user) {
+        user.emailToken = null;
+        user.isVerified = true
+
+        await user.save()
+
+        const token = createToken(user._id)
+
+        res.status(200).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          token,
+          isVerified: user?.isVerified,
+        })
+      } else res.status(404).json("Email verification failed, invalid token!")
+    } catch (error) {
+      console.log(error)
+      res.status(500).json(error.message)
+    }
+  }

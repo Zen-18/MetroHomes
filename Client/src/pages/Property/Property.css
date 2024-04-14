@@ -9,6 +9,11 @@
     cursor: pointer;
 }
 
+.property-container .del{
+    position: absolute;
+    top: 3rem;left: 3rem;
+    cursor: pointer;
+}
 
 .property-container>img{
     align-self: center;
@@ -46,6 +51,17 @@
 
 .property-details .button{
     width: 100%;
+    margin-top: 1rem;
+}
+
+.button-container {
+    display: flex; 
+    justify-content: space-between; 
+    gap: 3rem;
+  }
+
+.property-details .button1{
+    width: 254px;
     margin-top: 1rem;
 }
 

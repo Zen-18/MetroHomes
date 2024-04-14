@@ -11,7 +11,6 @@ export const createResidency = asyncHandler(async (req, res) => {
     city,
     facilities,
     image,
-    email,
   } = req.body.data;
 
   console.log(req.body.data);
@@ -26,7 +25,6 @@ export const createResidency = asyncHandler(async (req, res) => {
         city,
         facilities,
         image,
-        owner: { connect: { email } },
       },
     });
 
@@ -59,6 +57,59 @@ export const getResidency = asyncHandler(async (req, res) => {
     });
     res.send(residency);
   } catch (err) {
+    throw new Error(err.message);
+  }
+});
+
+export const deleteResidency = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Use Prisma's delete method to remove the property by its ID
+    await prisma.residency.delete({
+      where: { id },
+    });
+
+    res.send({ message: "Residency deleted successfully" });
+  } catch (err) {
+    // Handle errors
+    throw new Error(err.message);
+  }
+});
+
+// Function to update a residency
+export const updateResidency = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const {
+    title,
+    description,
+    price,
+    address,
+    country,
+    city,
+    facilities,
+    image,
+  } = req.body.data;
+
+  try {
+    // Use Prisma's update method to update the property by its ID
+    const updatedResidency = await prisma.residency.update({
+      where: { id },
+      data: {
+        title,
+        description,
+        price,
+        address,
+        country,
+        city,
+        facilities,
+        image,
+      },
+    });
+
+    res.send({ message: "Residency updated successfully", residency: updatedResidency });
+  } catch (err) {
+    // Handle errors
     throw new Error(err.message);
   }
 });

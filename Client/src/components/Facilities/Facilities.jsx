@@ -73,7 +73,6 @@ const Facilities = ({
           parkings: 0,
           bathrooms: 0,
         },
-        userEmail: user?.email,
       });
       setOpened(false);
       setActiveStep(0);

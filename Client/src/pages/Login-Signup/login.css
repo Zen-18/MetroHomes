@@ -41,6 +41,7 @@ body {
     padding: 0.5rem;
     border-radius: 4px;
     border: 1px solid #ccc;
+    width: 22rem;
   }
 
   .login-form button{

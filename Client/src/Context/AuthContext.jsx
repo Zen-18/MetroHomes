@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { createContext, useEffect, useReducer } from "react";
 
 export const AuthContext = createContext();
@@ -26,10 +27,15 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, []);
 
+  const updateUser = useCallback((res) => {
+    localStorage.setItem("user", JSON.stringify(res));
+    dispatch(response);
+  }, []);
+
   console.log("AuthContext state: ", state);
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
+    <AuthContext.Provider value={{ ...state, dispatch, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

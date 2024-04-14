@@ -1,6 +1,7 @@
 import React from "react";
 import "./PropertyCard.css";
 import { AiFillHeart } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
 import { truncate } from "lodash";
 import { useNavigate } from "react-router-dom";
 
