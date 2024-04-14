@@ -1,12 +1,7 @@
-import React, { useState } from "react";
-import { Container, Modal, Stepper } from "@mantine/core";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import React from "react";
 
-const ShowUpdateModal = ({ opened, setOpened }) => {
-  const [active, setActive] = useState(0);
-  const handleClose = () => {
-    setOpened(false);
-  };
+const ShowUpdateModal = () => {
+  return <div>ShowUpdate</div>;
 };
 
 export default ShowUpdateModal;

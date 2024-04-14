@@ -10,8 +10,7 @@
 }
 
 .property-container .del{
-    position: absolute;
-    top: 3rem;left: 3rem;
+    margin-left: 12rem;
     cursor: pointer;
 }
 

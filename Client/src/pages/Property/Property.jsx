@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -7,15 +7,28 @@ import { PuffLoader } from "react-spinners";
 import { AiFillHeart, AiTwotoneCar } from "react-icons/ai";
 import "./Property.css";
 import { useMutation } from "react-query";
-import { MdLocationPin, MdMeetingRoom } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdDelete, MdLocationPin, MdMeetingRoom } from "react-icons/md";
 import { FaShower } from "react-icons/fa";
 import Map from "../../components/Map/Map";
 import ShowUpdateModal from "../../components/ShowPropertyUpdate/ShowPropertyUpdate";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Property = () => {
   const [modalOpened, setModalOpened] = useState(false);
   const { pathname } = useLocation();
   const id = pathname.split("/").slice(-1)[0];
+  const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
+
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    if (user && user.isAdmin) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]);
 
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
@@ -118,28 +131,24 @@ const Property = () => {
               <span className="secondaryText">
                 {data?.address}, {data?.city}, {data?.country}
               </span>
+              {isAdmin && (
+                <div className="del" onClick={handleDelete}>
+                  <RiDeleteBin6Line size={35} color="red" />
+                </div>
+              )}
             </div>
 
             {/* Booking Button */}
             <button className="button">Book your Visit</button>
 
-            <div className="button-container">
-              <button
-                className="button button1"
-                style={{ background: "red" }}
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
-              <button className="button button1">
-                <div onClick={handleUpdate}>Update</div>
-              </button>
-
-              <ShowUpdateModal
-                opened={modalOpened}
-                setOpened={setModalOpened}
-              />
-            </div>
+            {/* <button className="button button1">
+                <div onClick={handleUpdate}>
+                  <ShowUpdateModal
+                    opened={modalOpened}
+                    setOpened={setModalOpened}
+                  />
+                </div>
+              </button> */}
           </div>
 
           {/* right */}
