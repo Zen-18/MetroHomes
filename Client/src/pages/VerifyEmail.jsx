@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 import { Alert, CircularProgress } from "@mui/material";
 import { baseUrl, postRequest } from "../utils/api.js";
 
@@ -8,10 +8,10 @@ export const VerifyEmail = () => {
   const { user, updateUser } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  let { emailToken } = useParams();
   const navigate = useNavigate();
 
-  const emailToken = searchParams.get("emailToken");
+  // const emailToken = searchParams.get("emailToken");
 
   console.log(user);
   console.log("emailToken", emailToken);
@@ -25,9 +25,9 @@ export const VerifyEmail = () => {
       } else {
         if (emailToken) {
           setIsLoading(true);
-
           const response = await postRequest(
-            `${baseUrl}/users/verify-email`,
+            `
+            ${baseUrl}/user/verify-email`,
             JSON.stringify({ emailToken })
           );
 
@@ -42,6 +42,7 @@ export const VerifyEmail = () => {
         }
       }
     };
+    fetchData();
   }, [emailToken, user]);
 
   return (

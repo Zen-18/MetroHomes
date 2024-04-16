@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
-import { deleteProperty, getProperty, updateResidency } from "../../utils/api"; // Import updateResidency
+import { useNavigate } from "react-router-dom";
+import {
+  deleteProperty,
+  getProperty,
+  getUserData,
+  updateResidency,
+} from "../../utils/api"; // Import updateResidency
 import { PuffLoader } from "react-spinners";
 import { AiFillHeart, AiTwotoneCar } from "react-icons/ai";
 import "./Property.css";
@@ -19,15 +25,23 @@ const Property = () => {
   const { pathname } = useLocation();
   const id = pathname.split("/").slice(-1)[0];
   const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
-
+  const [isVerified, setIsVerified] = useState(false);
+  const navigate = useNavigate();
   const { user } = useAuthContext();
-
+  console.log(user);
   useEffect(() => {
     if (user && user.isAdmin) {
       setIsAdmin(true);
     } else {
       setIsAdmin(false);
     }
+    const getUser = async () => {
+      const response = await getUserData(
+        JSON.parse(localStorage.getItem("user"))
+      );
+      setIsVerified(response.isVerified);
+    };
+    getUser();
   }, [user]);
 
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
@@ -60,6 +74,10 @@ const Property = () => {
 
   const handleUpdate = () => {
     setModalOpened(true);
+  };
+  const handleVerify = () => {
+    navigate("/verifyemail");
+    console.log("hello");
   };
 
   if (isLoading) {
@@ -139,7 +157,15 @@ const Property = () => {
             </div>
 
             {/* Booking Button */}
-            <button className="button">Book your Visit</button>
+            {isVerified ? (
+              <button className="button" disabled={user.isVerified}>
+                Book your Visit
+              </button>
+            ) : (
+              <button className="button" onClick={handleVerify}>
+                Please Verify your email to Book
+              </button>
+            )}
 
             {/* <button className="button button1">
                 <div onClick={handleUpdate}>

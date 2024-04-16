@@ -15,7 +15,7 @@
     margin-top: 10rem;
     margin-bottom: 10rem;
     background-color: white;
-    height: 400px;
+    height: 510px;
     border-radius: 25px;
 }
 
@@ -45,6 +45,7 @@
 
 .signup-form button{
     margin-bottom: .5rem;
+    margin-top: 1rem;
 }
 
 .signup-form .error {

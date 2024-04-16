@@ -1,0 +1,37 @@
+.wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+
+.loans-container .search-bar{
+    width: clamp(12rem, 100%, 28rem);
+    border-radius: 30px;
+    border: 1px solid rgba(120, 120, 120, 0.374);
+    flex-wrap: nowrap;
+    margin-left: 40%;
+    margin-top: 10rem;
+}
+
+.loans-container .search-bar .button{
+    border-radius: 30px;
+    font-size: 12px;
+    padding: 10px 15px;
+}
+
+.loans-container .search-bar input{
+    width: 70%;
+}
+
+.loans-container .wrapper .SearchBar{
+    margin-left: 10rem;
+}
+
+.loans-container{
+    height: 100%;   
+}
+
+.loans{
+    width: 100%;
+}

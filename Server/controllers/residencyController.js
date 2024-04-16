@@ -61,6 +61,8 @@ export const getResidency = asyncHandler(async (req, res) => {
   }
 });
 
+
+//function to delete a residency
 export const deleteResidency = asyncHandler(async (req, res) => {
   const { id } = req.params;
 

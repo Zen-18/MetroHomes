@@ -34,3 +34,30 @@ model Residency {
 
     @@unique(fields: [address])
 }
+
+model Lawyer {
+    id            String   @id @default(auto()) @map("_id") @db.ObjectId
+    name          String?
+    firm          String
+    location      String
+    image         String?
+    email         String   @unique
+    phoneNumber   String
+    qualification String
+    experience    String
+    createdAt     DateTime @default(now())
+}
+
+model Loan {
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    bank         String?
+    description  String
+    image        String?
+    interestRate Float
+    Address      String?
+    terms        String[]
+    documents    String[]
+    contactInfo  String
+    email        String   @unique
+    createdAt    DateTime @default(now())
+}

@@ -1,6 +1,12 @@
 import { Suspense, useState } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,8 +43,11 @@ function App() {
                 element={!user ? <Login /> : <Navigate to="/" replace={true} />}
               />
               <Route path="/signup" element={user ? <Message /> : <Signup />} />
-              <Route path="/verify-email" element={<VerifyEmail />} />
-
+              <Route
+                path="/verify-email/:emailToken"
+                element={<VerifyEmail />}
+              />
+              <Route path="/verifyemail" element={<Message />} />
               {/* Routes with Layout */}
               <Route element={<Layout />}>
                 <Route path="/" element={<Website />} />

@@ -17,6 +17,9 @@ const Signup = () => {
   return (
     <div className="form-wrapper">
       <form className="signup-form" onSubmit={handleSubmit}>
+        <div className="logo">
+          <img src="J.png" alt="" width={230} />
+        </div>
         <h3>Sign up to MetroHomes</h3>
 
         <label>Email:</label>

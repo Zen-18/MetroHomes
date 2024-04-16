@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import "./login.css"; // Import the CSS file
 import { Link } from "react-router-dom";
+import { TiInputCheckedOutline } from "react-icons/ti";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,10 @@ const Login = () => {
   return (
     <div className="form-wrapper">
       <form className="login-form" onSubmit={handleSubmit}>
+        <div className="logo">
+          <img src="J.png" alt="" width={230} />
+        </div>
+
         <h3>Login to MetroHomes</h3>
 
         <label>Email:</label>
@@ -36,6 +41,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
+        <div className="forgot Text">Forgot password?</div>
         <div className="user-type">
           <label>Role:</label>
           <select

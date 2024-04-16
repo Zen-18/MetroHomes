@@ -61,6 +61,14 @@ const Header = () => {
               <NavLink to="/properties">Properties</NavLink>
             </div>
 
+            <div className="properties-link">
+              <NavLink to="/Lawyers">Lawyers</NavLink>
+            </div>
+
+            <div className="properties-link">
+              <NavLink to="/Loans">Loan Plans</NavLink>
+            </div>
+
             {/* Add property button */}
             {isAdmin && user && (
               <div className="add-property-link">
