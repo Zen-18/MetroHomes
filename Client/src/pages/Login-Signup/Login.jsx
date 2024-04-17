@@ -41,7 +41,11 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        <div className="forgot Text">Forgot password?</div>
+        <div className="forgot Text">
+          <u>
+            <Link to="/forgot-password">Forgot password?</Link>
+          </u>
+        </div>
         <div className="user-type">
           <label>Role:</label>
           <select

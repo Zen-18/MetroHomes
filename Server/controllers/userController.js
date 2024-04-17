@@ -301,3 +301,78 @@ export const SendEmail = async (req, res) => {
     }
   });
 };
+
+export const generateForgotPassWordToken = async (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(404).json("Email not found....");
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "metrohomes977@gmail.com",
+        pass: "yxsk vcog klzm wekn",
+      },
+    });
+
+    var mailOptions = {
+      from: "metrohomes977@gmail.com",
+      to: email,
+      subject: "Reset Password Link",
+      html: `<h1>Reset Password Link</h1>
+      <a href="http://localhost:5173/forgot-password/${user.emailToken}">Reset Password</a>`,
+    };
+    console.log("Email was senttt");
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+
+    res
+      .json({
+        message: "Email sent",
+        token: user.emailToken,
+      })
+      .status(200);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ error: "Email not valid" });
+  }
+};
+export const resetPassword = async (req, res) => {
+  const { password, token } = req.body;
+  if (!password) return res.status(400).json({ message: "Password is empty" });
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        emailToken: token,
+      },
+    });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const hashedPassword = await bcrypt.hash(password, 12); // Adjust cost factor as needed
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+    return res
+      .status(200)
+      .json({ user, message: "Password reset successfully" });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Internal Server Error!" });
+  }
+};

@@ -24,6 +24,7 @@ import Loans from "./pages/Loans/Loans";
 import { VerifyEmail } from "./pages/VerifyEmail";
 import { Message } from "./pages/message";
 import Lawyer from "./pages/Lawyer/Lawyer";
+import ForgotPassword from "./pages/Auth/ForgetPassword";
 
 function App() {
   const { user } = useAuthContext();
@@ -45,6 +46,12 @@ function App() {
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" replace={true} />}
               />
+              <Route
+                exact
+                path="/forgot-password/:emailToken"
+                element={<ForgotPassword />}
+              />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/signup" element={user ? <Message /> : <Signup />} />
               <Route
                 path="/verify-email/:emailToken"

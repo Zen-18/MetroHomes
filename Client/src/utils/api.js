@@ -1,5 +1,6 @@
 import axios from "axios";
 import dayjs from "dayjs";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const api = axios.create({
@@ -279,5 +280,58 @@ export const getAllLoans = async () => {
     toast.error("Something went wrong");
     throw error;
   }
+};
+
+export const getTokenPassword = () => {
+  const [loading, setLoading] = useState(false);
+  const getPasswordToken = async (email) => {
+    setLoading(true);
+    const body = JSON.stringify({ email: email });
+
+    const response = await fetch(`${baseUrl}/user/get-password-token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    });
+    if (!response.ok) {
+      setLoading(false);
+      toast.error(response.statusText);
+      return;
+    }
+    const data = await response.json();
+    setLoading(false);
+    toast.success("Email Sent");
+    return data;
+  };
+  return { getPasswordToken, loading };
+};
+
+export const resetPassword = () => {
+  const [loading, setLoading] = useState(false);
+  const userResetPassword = async (password, emailToken) => {
+    console.log({ password, token: emailToken });
+    setLoading(true);
+    const body = JSON.stringify({ password, token: emailToken });
+
+    const response = await fetch(`${baseUrl}/user/reset-password`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    });
+    if (!response.ok) {
+      setLoading(false);
+      toast.error(response.statusText);
+      return;
+    }
+    const data = await response.json();
+    setLoading(false);
+    toast.success(data.message);
+    return data;
+  };
+  return { userResetPassword, loading };
 };
 

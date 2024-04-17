@@ -10,6 +10,9 @@ import {
   SendEmail,
   getUserData,
   verifyEmail,
+  resetPassword,
+  generateForgotPassWordToken,
+
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -24,5 +27,9 @@ router.post("/allFav/", getAllFavorites);
 router.post("/verify-email", verifyEmail);
 router.post("/getUser", getUserData);
 router.post("/send-verify-email", SendEmail);
+router.post("/verify-email", verifyEmail);
+router.post("/get-password-token", generateForgotPassWordToken);
+router.patch("/reset-password", resetPassword);
+
 
 export { router as userRoute };

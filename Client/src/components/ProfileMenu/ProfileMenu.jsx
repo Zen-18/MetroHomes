@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar, Menu } from "@mantine/core";
+import { Link } from "react-router-dom";
 import "@mantine/core/styles.css";
 
 const ProfileMenu = ({ user, logout }) => {
@@ -13,6 +14,9 @@ const ProfileMenu = ({ user, logout }) => {
         <Menu.Item>{user.email}</Menu.Item>
         <Menu.Item>Favourites</Menu.Item>
         <Menu.Item>Bookings</Menu.Item>
+        <Menu.Item>
+          <Link to="/forgot-password">Change Password</Link>
+        </Menu.Item>
         <Menu.Item
           onClick={() => {
             localStorage.clear();
