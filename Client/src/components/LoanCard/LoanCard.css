@@ -19,14 +19,13 @@
     .L-details{
     width: 200px; 
     height: 170px;
-    
     margin-left: 15rem;
   }
   
   .R-details { 
     height: 170px;
     width: 1000px;
-    margin-top: -170px;
+    margin-top: -190px;
     margin-left: 29rem;
   }
   
@@ -38,4 +37,14 @@
     color: orange;
   }
   
+
+  .contacts{
+    margin-top: .5rem;
+    gap: 3rem;
+      font-size: 0.9rem;
+  }
+  
+  .contact{
+    gap: 0.5rem;
+  }
 

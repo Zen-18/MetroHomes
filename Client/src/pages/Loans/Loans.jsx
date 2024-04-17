@@ -34,11 +34,14 @@ const Loans = () => {
     <div className="wrapper">
       <div className="flexColStart innerwidth loans-container">
         <SearchBar />
-        <div className="paddings flexCenter loans">
+        <div className="paddings flexColStart loans">
           {data.map((loancard, i) => (
             <LoanCard loancard={loancard} key={i} />
           ))}
         </div>
+        {/* <div className="flexCenter EMI">
+          <h1>EMI Calculator</h1>
+        </div> */}
       </div>
     </div>
   );

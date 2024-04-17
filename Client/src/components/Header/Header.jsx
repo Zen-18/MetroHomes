@@ -4,6 +4,7 @@ import { BiMenuAltRight } from "react-icons/bi";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Link, NavLink } from "react-router-dom";
 import AddPropertyModal from "../AddPropertyModal/AddPropertyModal";
+import AddLawyerModal from "../AddLawyerModal/AddLawyerModal.jsx";
 import { useLogout } from "../../hooks/useLogout.jsx";
 import { useAuthContext } from "../../hooks/useAuthContext.jsx";
 import ProfileMenu from "../ProfileMenu/ProfileMenu.jsx";
@@ -11,6 +12,7 @@ import ProfileMenu from "../ProfileMenu/ProfileMenu.jsx";
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
+  const [lawyermodalOpened, setLawyerModalOpened] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
 
   const { validateLogin, user, updateUser, state } = useAuthContext();
@@ -25,6 +27,10 @@ const Header = () => {
 
   const handleAddPropertyClick = () => {
     setModalOpened(true);
+  };
+
+  const handleAddLawyerClick = () => {
+    setLawyerModalOpened(true);
   };
 
   console.log("user", user);
@@ -60,15 +66,12 @@ const Header = () => {
             <div className="properties-link">
               <NavLink to="/properties">Properties</NavLink>
             </div>
-
             <div className="properties-link">
               <NavLink to="/Lawyers">Lawyers</NavLink>
             </div>
-
             <div className="properties-link">
               <NavLink to="/Loans">Loan Plans</NavLink>
             </div>
-
             {/* Add property button */}
             {isAdmin && user && (
               <div className="add-property-link">
@@ -77,10 +80,18 @@ const Header = () => {
             )}
             <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
 
+            {/*Add lawyer button*/}
+            <div className="contact-link" onClick={handleAddLawyerClick}>
+              Add Lawyer
+            </div>
+            <AddLawyerModal
+              opened={lawyermodalOpened}
+              setOpened={setLawyerModalOpened}
+            />
+
             <div className="contact-link">
               <a href="mailto:sherchankrish2715@gmail.com">Contact</a>
             </div>
-
             {/* login button */}
             {user ? (
               <div>

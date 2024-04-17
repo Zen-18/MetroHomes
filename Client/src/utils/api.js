@@ -49,6 +49,7 @@ export const getAllProperties = async () => {
     throw error;
   }
 };
+
 export const getUserData = async (user) => {
   const { email } = user;
   const body = JSON.stringify({ email });
@@ -203,3 +204,80 @@ export const updateResidency = async (id, data, token) => {
     throw error;
   }
 };
+
+//Lawyer
+export const createLawyer = async (data, token) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user || !user.email) {
+    throw new Error("User email not found in localStorage");
+  }
+
+  const email = user.email;
+  try {
+    const res = await api.post(
+      `/lawyer/register`,
+      {
+        data,
+        owner: { connect: { email } },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAllLawyers = async () => {
+  try {
+    const response = await api.get("/lawyer/allLawyer", {
+      timeout: 10 * 1000,
+    });
+
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
+    }
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong");
+    throw error;
+  }
+};
+
+export const getLawyer = async (id) => {
+  try {
+    const response = await api.get(`/lawyer/${id}`, {
+      timeout: 10 * 1000,
+    });
+
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
+    }
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong");
+    throw error;
+  }
+};
+
+//Lawyer
+export const getAllLoans = async () => {
+  try {
+    const response = await api.get("/loan/allLoans", {
+      timeout: 10 * 1000,
+    });
+
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
+    }
+    return response.data;
+  } catch (error) {
+    toast.error("Something went wrong");
+    throw error;
+  }
+};
+

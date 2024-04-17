@@ -19,8 +19,11 @@ import Properties from "./pages/Properties/Properties";
 import Property from "./pages/Property/Property";
 import Login from "./pages/Login-Signup/Login";
 import Signup from "./pages/Login-Signup/Signup";
+import Lawyers from "./pages/Lawyers/Lawyers";
+import Loans from "./pages/Loans/Loans";
 import { VerifyEmail } from "./pages/VerifyEmail";
 import { Message } from "./pages/message";
+import Lawyer from "./pages/Lawyer/Lawyer";
 
 function App() {
   const { user } = useAuthContext();
@@ -55,6 +58,11 @@ function App() {
                   <Route index element={<Properties />} />
                   <Route path=":propertyId" element={<Property />} />
                 </Route>
+                <Route path="/Lawyers">
+                  <Route index element={<Lawyers />} />
+                  <Route path=":lawyerId" element={<Lawyer />} />
+                </Route>
+                <Route path="/loans" element={<Loans />} />
               </Route>
             </Routes>
           </Suspense>

@@ -7,7 +7,7 @@ const LawyerCard = ({ lcard }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`../lawyers/${lcard._id}`); // Assuming lawyer ID is used for navigation
+    navigate(`../lawyers/${lcard.id}`); // Assuming lawyer ID is used for navigation
   };
 
   return (
@@ -20,7 +20,7 @@ const LawyerCard = ({ lcard }) => {
         <br />
         <span className="orangeText">{lcard.firm}</span>
         <br />
-        <span className="secondaryText">{lcard.location}</span>
+        <span className="secondaryText">{lcard.experience}</span>
         {/* Add more lawyer-specific details here */}
       </div>
     </div>

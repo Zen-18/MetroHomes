@@ -1,5 +1,8 @@
 .lawyers-container{
     gap: 2rem;
+    width: 60%;
+    margin: auto;
+    
 }
 .lawyers-container .search-bar{
     width: clamp(12rem, 100%, 28rem);
@@ -15,6 +18,6 @@
     padding: 10px 15px;
 }
 
-.lawyers-container .search-bar input{
+.lawyers-container .search-bar input{   
     width: 70%;
 }
