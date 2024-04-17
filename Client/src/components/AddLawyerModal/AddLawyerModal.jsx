@@ -65,8 +65,10 @@ const AddLawyerModal = ({ opened, setOpened }) => {
             description="Insert Qualification Informations"
           >
             <AddLawyerDetails
+              prevStep={prevStep}
               lawyerDetails={lawyerDetails}
               setlawyerDetails={setlawyerDetails}
+              setActiveStep={setActive}
             />
           </Stepper.Step>
           <Stepper.Completed>

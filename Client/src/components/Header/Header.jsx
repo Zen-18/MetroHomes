@@ -8,11 +8,13 @@ import AddLawyerModal from "../AddLawyerModal/AddLawyerModal.jsx";
 import { useLogout } from "../../hooks/useLogout.jsx";
 import { useAuthContext } from "../../hooks/useAuthContext.jsx";
 import ProfileMenu from "../ProfileMenu/ProfileMenu.jsx";
+import AddLoanModal from "../AddLoanModal/AddLoanModal.jsx";
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
   const [lawyermodalOpened, setLawyerModalOpened] = useState(false);
+  const [loanmodalOpened, setLoanModalOpened] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
 
   const { validateLogin, user, updateUser, state } = useAuthContext();
@@ -31,6 +33,10 @@ const Header = () => {
 
   const handleAddLawyerClick = () => {
     setLawyerModalOpened(true);
+  };
+
+  const handleAddLoanClick = () => {
+    setLoanModalOpened(true);
   };
 
   console.log("user", user);
@@ -87,6 +93,15 @@ const Header = () => {
             <AddLawyerModal
               opened={lawyermodalOpened}
               setOpened={setLawyerModalOpened}
+            />
+
+            {/*Add loan button*/}
+            <div className="contact-link" onClick={handleAddLoanClick}>
+              Add Loan Plans
+            </div>
+            <AddLoanModal
+              opened={loanmodalOpened}
+              setOpened={setLoanModalOpened}
             />
 
             <div className="contact-link">

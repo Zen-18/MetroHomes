@@ -1,19 +1,16 @@
 .loan-card{
-    gap: 0.6rem;
+  
     padding: 1rem;
     border-radius: 10px;
     width: 100%;
     margin: auto;
     transition: all 300ms ease-in;
-    z-index: 0;
-    position: relative;
-    cursor: pointer;
   }
 
-  .loan-details {
-    display: flex;
-    width: 100%;
-    margin-left: 10rem;
+  .loan-card .lawyer-details {
+    border: 1px solid;
+    width: 80%;
+    margin: auto;
   }
 
     .L-details{
