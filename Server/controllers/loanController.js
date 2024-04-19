@@ -7,7 +7,9 @@ export const createLoan = asyncHandler(async(req,res) => {
         description, 
         interestRate, 
         terms, 
+        image,
         contactInfo, 
+        documents,
         Address,
         email} = req.body.data;
 
@@ -20,8 +22,10 @@ export const createLoan = asyncHandler(async(req,res) => {
                 description, 
                 interestRate, 
                 terms, 
+                image,
                 Address,
                 contactInfo, 
+                documents,
                 email
               },
             });

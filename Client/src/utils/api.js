@@ -265,7 +265,48 @@ export const getLawyer = async (id) => {
   }
 };
 
-//Lawyer
+export const deleteLawyer = async (id) => {
+  try {
+    const response = await api.delete(`/lawyer/${id}`);
+
+    if (response.status === 200) {
+      toast.success("Lawyer deleted successfully");
+    } else {
+      throw new Error("Failed to delete lawyer");
+    }
+  } catch (error) {
+    toast.error("Error deleting lawyer");
+    throw error;
+  }
+};
+
+//Loan
+export const createLoan = async (data, token) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user || !user.email) {
+    throw new Error("User email not found in localStorage");
+  }
+
+  const email = user.email;
+  try {
+    const res = await api.post(
+      `/loan/create`,
+      {
+        data,
+        owner: { connect: { email } },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getAllLoans = async () => {
   try {
     const response = await api.get("/loan/allLoans", {
@@ -282,6 +323,22 @@ export const getAllLoans = async () => {
   }
 };
 
+export const deleteLoan = async (id) => {
+  try {
+    const response = await api.delete(`/loan/${id}`);
+
+    if (response.status === 200) {
+      toast.success("Loan deleted successfully");
+    } else {
+      throw new Error("Failed to delete Loan");
+    }
+  } catch (error) {
+    toast.error("Error deleting Loan");
+    throw error;
+  }
+};
+
+//Token
 export const getTokenPassword = () => {
   const [loading, setLoading] = useState(false);
   const getPasswordToken = async (email) => {

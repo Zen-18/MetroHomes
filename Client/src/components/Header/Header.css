@@ -15,7 +15,7 @@
 }
 
 .h-menu {
-    gap: 2rem;
+    gap: 1.3rem;
 }
 
 .h-menu>*:hover {
@@ -31,10 +31,10 @@
     font-weight: 500;
 }
 
-.contact-link a,
-.add-property-link div,
-.properties-link a { 
-    font-size: 1.2rem;
+.contact-link ,
+.add-property-link,
+.properties-link  { 
+    font-size: 1.3rem;
 }
 
 .login-buttons {

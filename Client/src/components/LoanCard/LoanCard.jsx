@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./LoanCard.css";
 import { useNavigate } from "react-router-dom";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { deleteLoan } from "../../utils/api";
+import { useMutation } from "react-query";
 
 const LoanCard = ({ loancard }) => {
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
+  const { user } = useAuthContext();
 
-  const handleCardClick = () => {
-    navigate(`../loans/${loancard._id}`); // Assuming lawyer ID is used for navigation
+  useEffect(() => {
+    if (user && user.isAdmin) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]);
+
+  const handleLoanDelete = () => {
+    // Pass the loan plan ID to the deleteLoan function
+    navigate(`../loans/${loancard._id}`);
   };
 
   return (
-    <div className="flexColStart loan-card" onClick={handleCardClick}>
+    <div className="flexColStart loan-card">
       {/* Display lawyer-specific information */}
       <div className="lawyer-details">
         <div className="L-details">
-          <img src={loancard.image} alt="bank" />
+          <img src={loancard.image} alt="bank" width={155} />
         </div>
         <div className="R-details">
           <span className="primaryText">{loancard.bank}</span>
@@ -26,7 +41,13 @@ const LoanCard = ({ loancard }) => {
             Interest Rate: {loancard.interestRate}%
           </span>
           <br />
-          <span className="secondaryText">{loancard.description}</span>
+          <span className="secondaryText">
+            Loan Plan: {loancard.description}
+          </span>
+          <br />
+          <span className="secondaryText">
+            Documents Required: {loancard.documents}
+          </span>
           <br />
           <div className="flexStart contacts">
             <div className="flexStart contact">
@@ -38,6 +59,11 @@ const LoanCard = ({ loancard }) => {
               <span className="secondaryText">{loancard.email}</span>
             </div>
           </div>
+          {isAdmin && (
+            <div className="del" onClick={handleLoanDelete}>
+              <RiDeleteBin6Line size={35} color="red" />
+            </div>
+          )}
         </div>
       </div>
     </div>

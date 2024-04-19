@@ -55,8 +55,8 @@ model Loan {
     image        String?
     interestRate Float
     Address      String?
-    terms        String[]
-    documents    String[]
+    terms        String
+    documents    String
     contactInfo  String
     email        String   @unique
     createdAt    DateTime @default(now())

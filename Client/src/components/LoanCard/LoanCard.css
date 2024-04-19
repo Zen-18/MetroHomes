@@ -1,29 +1,28 @@
 .loan-card{
-  
-    padding: 1rem;
     border-radius: 10px;
     width: 100%;
+    height: 200px;
     margin: auto;
-    transition: all 300ms ease-in;
+    
   }
 
   .loan-card .lawyer-details {
     border: 1px solid;
-    width: 80%;
-    margin: auto;
+    width: 90%;
+    height: 180px;
+    
   }
 
     .L-details{
-    width: 200px; 
-    height: 170px;
-    margin-left: 15rem;
+    padding: .5rem;
   }
   
   .R-details { 
     height: 170px;
     width: 1000px;
-    margin-top: -190px;
-    margin-left: 29rem;
+    margin-top: -180px;
+    margin-left: 12rem;
+    padding: .5rem;
   }
   
   .primaryText {
@@ -44,4 +43,10 @@
   .contact{
     gap: 0.5rem;
   }
+
+  .R-details .del{
+    margin-top: -10rem;
+    margin-left: 51.5rem;
+  }
+
 

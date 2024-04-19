@@ -62,4 +62,10 @@
   color: black;
 }
 
+.del{
+  margin-top: -21rem;
+  margin-left: 25rem;
+  cursor: pointer;
+}
+
 

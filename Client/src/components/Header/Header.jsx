@@ -3,18 +3,13 @@ import "./Header.css";
 import { BiMenuAltRight } from "react-icons/bi";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Link, NavLink } from "react-router-dom";
-import AddPropertyModal from "../AddPropertyModal/AddPropertyModal";
-import AddLawyerModal from "../AddLawyerModal/AddLawyerModal.jsx";
 import { useLogout } from "../../hooks/useLogout.jsx";
 import { useAuthContext } from "../../hooks/useAuthContext.jsx";
 import ProfileMenu from "../ProfileMenu/ProfileMenu.jsx";
-import AddLoanModal from "../AddLoanModal/AddLoanModal.jsx";
+import AddMenu from "../ProfileMenu/AddMenu.jsx";
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
-  const [modalOpened, setModalOpened] = useState(false);
-  const [lawyermodalOpened, setLawyerModalOpened] = useState(false);
-  const [loanmodalOpened, setLoanModalOpened] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
 
   const { validateLogin, user, updateUser, state } = useAuthContext();
@@ -26,18 +21,6 @@ const Header = () => {
       setIsAdmin(false);
     }
   }, [user]);
-
-  const handleAddPropertyClick = () => {
-    setModalOpened(true);
-  };
-
-  const handleAddLawyerClick = () => {
-    setLawyerModalOpened(true);
-  };
-
-  const handleAddLoanClick = () => {
-    setLoanModalOpened(true);
-  };
 
   console.log("user", user);
 
@@ -69,6 +52,7 @@ const Header = () => {
             className="h-menu flexCenter Text"
             style={getMenuStyles(menuOpened)}
           >
+            {isAdmin && user && <AddMenu user={user} />}
             <div className="properties-link">
               <NavLink to="/properties">Properties</NavLink>
             </div>
@@ -78,35 +62,8 @@ const Header = () => {
             <div className="properties-link">
               <NavLink to="/Loans">Loan Plans</NavLink>
             </div>
-            {/* Add property button */}
-            {isAdmin && user && (
-              <div className="add-property-link">
-                <div onClick={handleAddPropertyClick}>Add Property</div>
-              </div>
-            )}
-            <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
+            <div></div>
 
-            {/*Add lawyer button*/}
-            <div className="contact-link" onClick={handleAddLawyerClick}>
-              Add Lawyer
-            </div>
-            <AddLawyerModal
-              opened={lawyermodalOpened}
-              setOpened={setLawyerModalOpened}
-            />
-
-            {/*Add loan button*/}
-            <div className="contact-link" onClick={handleAddLoanClick}>
-              Add Loan Plans
-            </div>
-            <AddLoanModal
-              opened={loanmodalOpened}
-              setOpened={setLoanModalOpened}
-            />
-
-            <div className="contact-link">
-              <a href="mailto:sherchankrish2715@gmail.com">Contact</a>
-            </div>
             {/* login button */}
             {user ? (
               <div>
