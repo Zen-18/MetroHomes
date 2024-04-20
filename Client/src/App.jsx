@@ -25,6 +25,8 @@ import { VerifyEmail } from "./pages/VerifyEmail";
 import { Message } from "./pages/message";
 import Lawyer from "./pages/Lawyer/Lawyer";
 import ForgotPassword from "./pages/Auth/ForgetPassword";
+import Bookings from "./pages/Bookings and favourites/Bookings";
+import Favourites from "./pages/Bookings and favourites/Favourites";
 
 function App() {
   const { user } = useAuthContext();
@@ -65,6 +67,8 @@ function App() {
                   <Route index element={<Properties />} />
                   <Route path=":propertyId" element={<Property />} />
                 </Route>
+                <Route path="/bookings" element={<Bookings />} />
+                <Route path="/favourites" element={<Favourites />} />
                 <Route path="/Lawyers">
                   <Route index element={<Lawyers />} />
                   <Route path=":lawyerId" element={<Lawyer />} />

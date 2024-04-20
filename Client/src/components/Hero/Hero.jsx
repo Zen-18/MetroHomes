@@ -5,7 +5,8 @@ import SearchBar from "../SearchBar/SearchBar";
 const Hero = () => {
   return (
     <section className="hero-wrapper">
-      <div className="paddings innerWidth flexCenter hero-container">
+      <div className=" flexCenter hero-container">
+        <img src="../../public/BG.jpg" alt="" />
         {/* left side */}
         {/* <div className="flexColStart hero-left"> */}
         {/* <div className="hero-title">
@@ -25,10 +26,11 @@ const Hero = () => {
           <span>Forget all difficulties in finding a residence for you</span>
           <span>Find a variety of properties that suit you very easilty</span>
         </div> */}
+        <div className="flexCenter innerWidth">
+          <SearchBar />
+        </div>
 
-        <SearchBar />
-
-        <div className="flexCenter stats">
+        {/* <div className="flexCenter stats">
           <div className="flexColCenter stat">
             <span>
               <CountUp start={8800} end={9000} duration={4} /> <span>+</span>
@@ -49,7 +51,7 @@ const Hero = () => {
             </span>
             <span className="secondaryText">Awards Winning</span>
           </div>
-        </div>
+        </div> */}
         {/* </div> */}
 
         {/* right side */}

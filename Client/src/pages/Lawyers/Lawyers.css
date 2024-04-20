@@ -10,6 +10,8 @@
     border: 1px solid rgba(120, 120, 120, 0.374);
     flex-wrap: nowrap;
     margin-left: 30%;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .lawyers-container .search-bar .button{

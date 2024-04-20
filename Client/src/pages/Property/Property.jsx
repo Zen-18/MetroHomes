@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
-import { BiMenuAltRight } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import {
   deleteProperty,
   getProperty,
   getUserData,
+  removeBooking,
   updateResidency,
 } from "../../utils/api"; // Import updateResidency
 import { PuffLoader } from "react-spinners";
@@ -19,16 +19,39 @@ import { FaShower } from "react-icons/fa";
 import Map from "../../components/Map/Map";
 import ShowUpdateModal from "../../components/ShowPropertyUpdate/ShowPropertyUpdate";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import BookingModal from "../../components/BookingModal/BookingModal";
+import UserDetailContext from "../../Context/UserDetailContext";
+import { Button } from "@mantine/core";
+import { toast } from "react-toastify";
+import Heart from "../../components/Heart/Heart";
 
 const Property = () => {
   const [modalOpened, setModalOpened] = useState(false);
+  const [BookmodalOpened, setBookModalOpened] = useState(false);
   const { pathname } = useLocation();
   const id = pathname.split("/").slice(-1)[0];
   const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
   const [isVerified, setIsVerified] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuthContext();
-  console.log(user);
+
+  const {
+    userDetails: { token, bookings },
+    setUserDetails,
+  } = useContext(UserDetailContext);
+
+  const { mutate: cancelBooking, isLoading: cancelling } = useMutation({
+    mutationFn: () => removeBooking(id, user?.email, token),
+    onSuccess: () => {
+      setUserDetails((prev) => ({
+        ...prev,
+        bookings: prev.bookings.filter((booking) => booking?.id !== id),
+      }));
+
+      toast.success("Booking Cancelled", { position: "bottom-right" });
+    },
+  });
+
   useEffect(() => {
     if (user && user.isAdmin) {
       setIsAdmin(true);
@@ -72,9 +95,6 @@ const Property = () => {
     deleteMutation(id);
   };
 
-  const handleUpdate = () => {
-    setModalOpened(true);
-  };
   const handleVerify = () => {
     navigate("/verifyemail");
     console.log("hello");
@@ -105,7 +125,7 @@ const Property = () => {
       <div className="flexColStart paddings innerWidth property-container">
         {/* like button */}
         <div className="like">
-          <AiFillHeart size={24} color="white" />
+          <Heart id={id} />
         </div>
 
         {/* image */}
@@ -157,14 +177,43 @@ const Property = () => {
             </div>
 
             {/* Booking Button */}
-            {isVerified ? (
-              <button className="button" disabled={user.isVerified}>
-                Book your Visit
-              </button>
-            ) : (
+            {!isVerified ? (
               <button className="button" onClick={handleVerify}>
                 Please Verify your email to Book
               </button>
+            ) : bookings && bookings.some((booking) => booking.id === id) ? (
+              <>
+                <Button
+                  variant="outline"
+                  w={"100%"}
+                  color="red"
+                  onClick={() => cancelBooking()}
+                  disabled={cancelling}
+                >
+                  <span>Cancel Booking</span>
+                </Button>
+                <span>
+                  Your visit already booked for the date{" "}
+                  {bookings?.filter((booking) => booking?.id === id)[0].date}
+                </span>
+              </>
+            ) : (
+              <div>
+                <button
+                  className="button-book"
+                  onClick={() => {
+                    setModalOpened(true);
+                  }}
+                >
+                  Book your Visit
+                </button>
+                <BookingModal
+                  opened={modalOpened}
+                  setOpened={setModalOpened}
+                  propertyId={id}
+                  email={user?.email}
+                />
+              </div>
             )}
 
             {/* <button className="button button1">

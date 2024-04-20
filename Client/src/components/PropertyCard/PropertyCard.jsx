@@ -4,6 +4,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { truncate } from "lodash";
 import { useNavigate } from "react-router-dom";
+import Heart from "../Heart/Heart";
 
 const PropertyCard = ({ card }) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const PropertyCard = ({ card }) => {
       className="flexColStart r-card"
       onClick={() => navigate(`../properties/${card.id}`)}
     >
-      <AiFillHeart size={24} color="white" />
+      <AiFillHeart />
 
       <img src={card.image} alt="home" />
 

@@ -9,7 +9,8 @@
     border: 1px solid rgba(120, 120, 120, 0.374);
     flex-wrap: nowrap;
     margin-left: 38%;
-    margin-top: 10rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .loans-container .search-bar .button{

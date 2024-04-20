@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import "./Properties.css";
+import "../Properties/Properties.css";
 import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
+import UserDetailContext from "../../Context/UserDetailContext";
 
-const Properties = () => {
+const Bookings = () => {
   const { data, isError, isLoading } = useProperties();
   const [filter, setFilter] = useState("");
+  const {
+    userDetails: { bookings },
+  } = useContext(UserDetailContext);
 
   if (isError) {
     return (
@@ -34,6 +38,11 @@ const Properties = () => {
   return (
     <div className="wrapper">
       <div className="flexColStart paddings innerWidth properties-container">
+        <u className="book">
+          <h1 className="book" style={{ color: "var(--button)" }}>
+            Bookings
+          </h1>
+        </u>
         <SearchBar filter={filter} setFilter={setFilter} />
 
         <div className="paddings flexCenter properties">
@@ -42,6 +51,11 @@ const Properties = () => {
             //   <PropertyCard card={card} key={i} />))
 
             data
+
+              .filter((property) =>
+                bookings.map((booking) => booking.id).includes(property.id)
+              )
+
               .filter(
                 (property) =>
                   property.title.toLowerCase().includes(filter.toLowerCase()) ||
@@ -58,4 +72,4 @@ const Properties = () => {
   );
 };
 
-export default Properties;
+export default Bookings;
