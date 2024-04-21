@@ -37,7 +37,10 @@ const ForgotPassword = () => {
   return (
     <div>
       <div className="form-wrapper">
-        <form className="login-form">
+        <form
+          className="login-form"
+          style={{ height: "300px", marginTop: "16rem" }}
+        >
           {!emailToken && (
             <>
               <h3>Get Token on Email.</h3>
