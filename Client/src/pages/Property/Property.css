@@ -67,6 +67,14 @@
     gap: 3rem;
   }
 
+  .hire-button{
+    background-color: var(--button);
+    width: 250px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+  }
+
 .property-details .button1{
     width: 254px;
     margin-top: 1rem;

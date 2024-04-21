@@ -4,23 +4,22 @@
 }
 
 .loans-container .search-bar{
-    width: clamp(12rem, 100%, 28rem);
+    justify-content: space-around;  
+    width: 40%;
     border-radius: 30px;
-    border: 1px solid rgba(120, 120, 120, 0.374);
+    border: 3px solid rgba(120, 120, 120, 0.374);
+    height: 60px;
     flex-wrap: nowrap;
-    margin-left: 38%;
+    margin-left: 28%;
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
 }
 
-.loans-container .search-bar .button{
-    border-radius: 30px;
-    font-size: 12px;
-    padding: 10px 15px;
-}
 
 .loans-container .search-bar input{
-    width: 70%;
+    width: 60%;
+    border: none;
+    outline: none;
 }
 
 .loans-container{

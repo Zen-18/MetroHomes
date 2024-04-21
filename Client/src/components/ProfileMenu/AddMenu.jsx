@@ -3,6 +3,7 @@ import AddPropertyModal from "../AddPropertyModal/AddPropertyModal";
 import AddLawyerModal from "../AddLawyerModal/AddLawyerModal";
 import AddLoanModal from "../AddLoanModal/AddLoanModal";
 import { Menu } from "@mantine/core";
+import { NavLink } from "react-router-dom";
 
 const AddMenu = () => {
   const [modalOpened, setModalOpened] = useState(false);
@@ -74,6 +75,9 @@ const AddMenu = () => {
         setOpened={setLawyerModalOpened}
       />
       <AddLoanModal opened={loanmodalOpened} setOpened={setLoanModalOpened} />
+      <div className="properties-link" style={{ marginLeft: "1rem" }}>
+        <NavLink to="/Lawyers">Lawyers</NavLink>
+      </div>
     </div>
   );
 };

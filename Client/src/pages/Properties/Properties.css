@@ -2,21 +2,18 @@
     gap: 2rem;
 }
 .properties-container .search-bar{
-    width: clamp(12rem, 100%, 28rem);
-    border-radius: 30px;
-    border: 1px solid rgba(120, 120, 120, 0.374);
-    flex-wrap: nowrap;
+    border-radius: 40px;
+    border: 3px solid rgba(120, 120, 120, 0.374);
+    justify-content: space-around;
+    height: 60px;
+    width: 50%;
     margin-left: 30%;   
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
 }
 
-.properties-container .search-bar .button{
-    border-radius: 30px;
-    font-size: 12px;
-    padding: 10px 15px;
-}
-
 .properties-container .search-bar input{
-    width: 70%;
+    width: 60%;
+    border: none;
+    outline: none;  
 }

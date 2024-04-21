@@ -16,30 +16,52 @@ export const Message = () => {
       console.log(error.message);
     }
   };
-  const toastaaa = () => {
-    toast.success("Wow so easy!");
-  };
 
   return (
-    <>
-      <h1>
-        Email: {user?.email} ---- {""}
-        {user?.isVerified ? (
-          <span className="verified">verified</span>
-        ) : (
-          <span className="not-verified">Not verified</span>
-        )}
-      </h1>
-      <p>
-        To verify you account please press <u>Get Verification Link</u> button
-        below
-      </p>
-      <button onClick={handleEmailVerfication} className="button">
-        Get Verification
-      </button>{" "}
-      <button onClick={toastaaa} className="button">
-        Get Verification
-      </button>
-    </>
+    <div
+      className="flexCenter paddings"
+      style={{
+        background: "white",
+        height: "80vh",
+        width: "150rem",
+        marginTop: "6rem",
+        marginLeft: "20 rem",
+      }}
+    >
+      <div className="flexCenter innerWidth paddings">
+        <img src="./email.png" alt="" width={300} />
+      </div>
+      <div
+        className="flexCenter innerWidth paddings"
+        style={{ width: "100%", marginTop: "-5rem" }}
+      >
+        <h1 className="primaryText">
+          Email Address: {user?.email}
+          <br />{" "}
+          <div className="flexCenter innerWidth">
+            Status: {""}
+            {user?.isVerified ? (
+              <span className="verified">verified</span>
+            ) : (
+              <span className="not-verified">Not verified</span>
+            )}
+          </div>
+        </h1>
+      </div>
+      <div className="flexCenter innerWidth paddings" style={{ width: "100%" }}>
+        <p style={{ fontSize: "20px" }}>
+          To verify you account please press{" "}
+          <u className="orangeText">Get Verification Link</u> button below
+        </p>
+      </div>
+      <div
+        className="flexCenter innerWidth paddings"
+        style={{ width: "100%", marginTop: "-5rem" }}
+      >
+        <button onClick={handleEmailVerfication} className="button">
+          Get Verification Link
+        </button>
+      </div>
+    </div>
   );
 };

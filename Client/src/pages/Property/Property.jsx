@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   deleteProperty,
@@ -195,6 +195,17 @@ const Property = () => {
                 <span>
                   Your visit already booked for the date{" "}
                   {bookings?.filter((booking) => booking?.id === id)[0].date}
+                </span>
+                <span>
+                  Are you in need of legal assistance? If so
+                  <button
+                    className="properties-link hire-button"
+                    style={{ marginLeft: "1rem" }}
+                  >
+                    <NavLink to="/Lawyers">
+                      <u>Hire yourself a Lawyer</u>
+                    </NavLink>
+                  </button>
                 </span>
               </>
             ) : (

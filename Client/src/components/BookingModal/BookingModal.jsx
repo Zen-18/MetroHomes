@@ -46,7 +46,23 @@ const BookingModal = ({ opened, setOpened, email, propertyId }) => {
       centered
     >
       <div className="flexColCenter" style={{ gap: "1rem" }}>
-        <DatePicker value={value} onChange={setValue} minDate={new Date()} />
+        <DatePicker
+          value={value}
+          onChange={setValue}
+          getDayProps={() => {
+            return {
+              sx: (theme) => ({
+                backgroundColor: theme.colors.red[6],
+                color: theme.black,
+                ...theme.fn.hover({
+                  backgroundColor: theme.colors.violet[7],
+                  color: theme.white,
+                }),
+              }),
+            };
+          }}
+        />
+
         <Button disabled={!value || isLoading} onClick={() => mutate()}>
           Book Visit
         </Button>
