@@ -5,15 +5,19 @@ const GetStarted = () => {
     <div id="get-started" className="g-wrapper">
       <div className="paddings innerWidth g-container">
         <div className="flexColCenter inner-container">
-          <span className="primaryText">Send your Property to MetroHomes</span>
+          <span className="primaryText">Send your Details to MetroHomes</span>
           <span className="secondaryText">
-            Do you want to list your property as well.
-            <br />
-            Then connect with us.
+            Do you also want to list your property or list yourselves as a
+            Lawyer. Then connect with us on{" "}
+            <p className="text">metrohomes977@gmail.com</p>
           </span>
           <button className="button">
-            <a href="mailto:sherchankrish2715@gmail.com">Get Started</a>
+            <a href="mailto:metrohomes977@gmail.com">Send Us your Details</a>
           </button>
+          <span className="secondaryText">
+            Make sure to attach all the details needed to list your Property or
+            yourselves in the mail.
+          </span>
         </div>
       </div>
     </div>

@@ -39,7 +39,7 @@ const ForgotPassword = () => {
       <div className="form-wrapper">
         <form
           className="login-form"
-          style={{ height: "300px", marginTop: "16rem" }}
+          style={{ height: "400px", marginTop: "16rem" }}
         >
           {!emailToken && (
             <>
@@ -59,8 +59,15 @@ const ForgotPassword = () => {
             </>
           )}
           {emailToken && (
-            <>
-              <label>New Password:</label>
+            <div
+              className="flexCenter"
+              style={{
+                height: "40rem",
+                borderRadius: "10px",
+                marginTop: "20px",
+              }}
+            >
+              <label className="innerWidth flexCenter">New Password:</label>
               <input
                 className="input"
                 type="password"
@@ -84,7 +91,7 @@ const ForgotPassword = () => {
               >
                 {loading ? "Reseting..." : "Reset Password"}
               </button>
-            </>
+            </div>
           )}
         </form>
       </div>

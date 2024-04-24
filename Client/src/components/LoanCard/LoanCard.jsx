@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "./LoanCard.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { deleteLoan } from "../../utils/api";
 import { useMutation } from "react-query";
+import { truncate } from "lodash";
+import "./LoanCard.css";
 
 const LoanCard = ({ loancard }) => {
-  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const navigate = useNavigate(); // Updated to useNavigate hook
   const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
   const { user } = useAuthContext();
+  const id = pathname.split("/").slice(-1)[0];
 
   useEffect(() => {
     if (user && user.isAdmin) {
@@ -21,9 +24,16 @@ const LoanCard = ({ loancard }) => {
     }
   }, [user]);
 
+  const deleteMutation = useMutation(deleteLoan, {
+    onSuccess: () => {
+      // Redirect to the homepage after successful deletion
+      navigate("/loans"); // Updated to use navigate function
+    },
+  });
+
   const handleLoanDelete = () => {
     // Pass the loan plan ID to the deleteLoan function
-    navigate(`../loans/${loancard._id}`);
+    deleteMutation.mutate(id);
   };
 
   return (
@@ -42,7 +52,7 @@ const LoanCard = ({ loancard }) => {
           </span>
           <br />
           <span className="secondaryText">
-            Loan Plan: {loancard.description}
+            Loan Plan: {truncate(loancard.description, { length: 100 })}
           </span>
           <br />
           <span className="secondaryText">

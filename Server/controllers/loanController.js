@@ -65,12 +65,30 @@ export const getAllLoans = asyncHandler(async (req, res) => {
     const { id } = req.params;
   
     try {
-      await prisma.loan.delete({
-        where: { id },
+      // Convert the ID to an integer before passing it to Prisma
+      const loanId = parseInt(id);
+  
+      // Ensure that the loan with the provided ID exists before attempting deletion
+      const existingLoan = await prisma.loan.findUnique({
+        where: { id: loanId },
       });
   
+      if (!existingLoan) {
+        // If the loan doesn't exist, return a 404 Not Found response
+        res.status(404).send({ error: "Loan not found." });
+        return;
+      }
+  
+      // Delete the loan using the correct loan ID
+      await prisma.loan.delete({
+        where: { id: loanId },
+      });
+  
+      // Send a success response
       res.send({ message: "Loan deleted successfully" });
     } catch (err) {
-      throw new Error(err.message);
+      // If an error occurs during deletion, return a 500 Internal Server Error response
+      res.status(500).send({ error: "An error occurred while deleting the loan." });
     }
   });
+  

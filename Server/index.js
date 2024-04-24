@@ -4,9 +4,6 @@ import cookieParser from "cookie-parser";
 import cors from 'cors'
 import { userRoute } from "./routes/userRoutes.js";
 import { residencyRoute } from "./routes/residencyRoute.js";
-import pkg from '@prisma/client';
-import nodemailer from 'nodemailer'
-import { v4 as uuidv4 } from 'uuid';
 import { lawyerRoute } from "./routes/lawyerRoutes.js";
 import { loanRoute } from "./routes/loanRoutes.js";
 

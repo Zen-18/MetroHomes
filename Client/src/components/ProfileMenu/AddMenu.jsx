@@ -39,7 +39,7 @@ const AddMenu = () => {
       <div
         style={{
           fontSize: "1.3rem",
-          marginRight: "10px",
+          width: "5rem",
         }}
         onClick={handleMenuToggle}
       >
@@ -65,7 +65,7 @@ const AddMenu = () => {
             Add Lawyer
           </Menu.Item>
           <Menu.Item onClick={handleAddLoanClick} style={{ fontSize: "1rem" }}>
-            Add Loan Plans
+            Add Loans
           </Menu.Item>
         </Menu>
       )}

@@ -22,6 +22,9 @@ const ProfileMenu = ({ user, logout }) => {
         <Menu.Item>
           <Link to="/forgot-password">Change Password</Link>
         </Menu.Item>
+        <Menu.Item>
+          <Link to="/verifyemail">Verify Email</Link>
+        </Menu.Item>
         <Menu.Item
           onClick={() => {
             localStorage.clear();

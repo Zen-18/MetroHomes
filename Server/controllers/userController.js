@@ -8,6 +8,7 @@ import nodemailer from "nodemailer";
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
 };
+
 // function to login
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -29,7 +30,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
-    const isAdmin = user.email === "Krish78@gmail.com"; // Change "your@admin.email" to your desired admin email
+    const isAdmin = user.email === "metrohomes977@gmail.com"; //admin email
 
     // Create a JWT token (consider using a library like jsonwebtoken)
     const token = createToken(user._id); // Pass user ID for token payload
