@@ -23,13 +23,12 @@ export const Message = () => {
       style={{
         background: "white",
         height: "80vh",
-        width: "150rem",
-        marginTop: "6rem",
-        marginLeft: "20 rem",
+        width: "100rem",
+        marginTop: "5rem",
       }}
     >
       <div className="flexCenter innerWidth paddings">
-        <img src="./email.png" alt="" width={300} />
+        <img src="./email.png" alt="" width={200} />
       </div>
       <div
         className="flexCenter innerWidth paddings"

@@ -17,3 +17,7 @@
     border: none;
     outline: none;  
 }
+
+.properties-container .search-bar button{
+    border-radius: 20px;
+}

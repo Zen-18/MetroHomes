@@ -43,7 +43,6 @@ const Favourites = () => {
             Favourites
           </h1>
         </u>
-        <SearchBar filter={filter} setFilter={setFilter} />
 
         <div className="paddings flexCenter properties">
           {

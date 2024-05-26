@@ -10,11 +10,10 @@ import { truncate } from "lodash";
 import "./LoanCard.css";
 
 const LoanCard = ({ loancard }) => {
-  const { pathname } = useLocation();
-  const navigate = useNavigate(); // Updated to useNavigate hook
-  const [isAdmin, setIsAdmin] = useState(false); // State to store isAdmin flag
+  const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
   const { user } = useAuthContext();
-  const id = pathname.split("/").slice(-1)[0];
+  const id = loancard.id; // Get id from loancard object
 
   useEffect(() => {
     if (user && user.isAdmin) {
@@ -26,19 +25,21 @@ const LoanCard = ({ loancard }) => {
 
   const deleteMutation = useMutation(deleteLoan, {
     onSuccess: () => {
-      // Redirect to the homepage after successful deletion
-      navigate("/loans"); // Updated to use navigate function
+      console.log("Loan deleted successfully");
+      navigate("/loans");
+    },
+    onError: (error) => {
+      console.error("Error deleting loan:", error);
     },
   });
 
   const handleLoanDelete = () => {
-    // Pass the loan plan ID to the deleteLoan function
+    console.log("Deleting loan with id:", id);
     deleteMutation.mutate(id);
   };
 
   return (
     <div className="flexColStart loan-card">
-      {/* Display lawyer-specific information */}
       <div className="lawyer-details">
         <div className="L-details">
           <img src={loancard.image} alt="bank" width={155} />
@@ -52,7 +53,7 @@ const LoanCard = ({ loancard }) => {
           </span>
           <br />
           <span className="secondaryText">
-            Loan Plan: {truncate(loancard.description, { length: 100 })}
+            Loan Plan: {truncate(loancard.description, { length: 80 })}
           </span>
           <br />
           <span className="secondaryText">
@@ -81,3 +82,4 @@ const LoanCard = ({ loancard }) => {
 };
 
 export default LoanCard;
+6;

@@ -39,7 +39,7 @@ const ForgotPassword = () => {
       <div className="form-wrapper">
         <form
           className="login-form"
-          style={{ height: "400px", marginTop: "16rem" }}
+          style={{ height: "400px", marginTop: "2rem" }}
         >
           {!emailToken && (
             <>

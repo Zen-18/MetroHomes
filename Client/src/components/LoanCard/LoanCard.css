@@ -2,19 +2,20 @@
     border-radius: 10px;
     width: 100%;
     height: 200px;
-    margin: auto;
+
     
   }
 
   .loan-card .lawyer-details {
     border: 1px solid;
-    width: 90%;
+    width: 100%;
     height: 180px;
     
   }
 
     .L-details{
     padding: .5rem;
+    width: 100%;
   }
   
   .R-details { 
@@ -46,7 +47,7 @@
 
   .R-details .del{
     margin-top: -10rem;
-    margin-left: 51.5rem;
+    margin-left: 40rem;
   }
 
 

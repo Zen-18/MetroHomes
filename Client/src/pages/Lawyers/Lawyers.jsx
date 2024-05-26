@@ -33,8 +33,6 @@ const Lawyers = () => {
   return (
     <div className="wrapper">
       <div className="flexColStart innerwidth lawyers-container">
-        <SearchBar />
-
         <div className="paddings flexCenter lawyers">
           {data.map((lcard, i) => (
             <LawyerCard lcard={lcard} key={i} />
