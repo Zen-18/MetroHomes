@@ -26,9 +26,6 @@ const Hero = () => {
           <span>Forget all difficulties in finding a residence for you</span>
           <span>Find a variety of properties that suit you very easilty</span>
         </div> */}
-        <div className="flexCenter innerWidth">
-          <SearchBar />
-        </div>
 
         {/* <div className="flexCenter stats">
           <div className="flexColCenter stat">

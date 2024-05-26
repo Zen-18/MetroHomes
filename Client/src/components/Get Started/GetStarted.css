@@ -18,7 +18,7 @@
     background: var(--button);
     border: 2px solid white;
     box-shadow: var(--shadow);
-    border-radius: 10px;
+    border-radius: 20px;
 }
 .text{
     font-size: 20px;

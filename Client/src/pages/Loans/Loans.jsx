@@ -118,30 +118,33 @@ const Loans = () => {
                 placeholder="Total Loan Amount"
                 value={totalLoanAmount}
                 onChange={(e) => setTotalLoanAmount(e.target.value)}
-                style={{ borderRadius: "8px", textAlign: "center" }}
+                style={{
+                  borderRadius: "8px",
+                  textAlign: "center",
+                }}
               />
               <div className="Text" style={{ marginTop: "1rem" }}>
-                Loan EMI Amount
+                Monthly EMI Amount
               </div>
               <input
                 type="text"
-                placeholder="Loan EMI Amount"
+                placeholder="Monthly EMI Amount"
                 value={loanEMIAmount}
                 readOnly
                 style={{ borderRadius: "8px", textAlign: "center" }}
               />
               <div className="Text" style={{ marginTop: "1rem" }}>
-                Total Interest
+                Total Loan Interest
               </div>
               <input
                 type="text"
-                placeholder="Total Interest"
+                placeholder="Total Loan Interest"
                 value={totalInterest}
                 readOnly
                 style={{ borderRadius: "8px", textAlign: "center" }}
               />
               <div className="Text" style={{ marginTop: "1rem" }}>
-                Total Amount
+                Total Payment Amount
               </div>
               <input
                 type="text"

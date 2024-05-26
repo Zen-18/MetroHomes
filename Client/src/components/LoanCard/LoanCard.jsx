@@ -51,6 +51,9 @@ const LoanCard = ({ loancard }) => {
           <span className="orangeText">
             Interest Rate: {loancard.interestRate}%
           </span>
+          <span className="orangeText" style={{ marginLeft: "3rem" }}>
+            Loan Term: {loancard.terms}
+          </span>
           <br />
           <span className="secondaryText">
             Loan Plan: {truncate(loancard.description, { length: 80 })}
