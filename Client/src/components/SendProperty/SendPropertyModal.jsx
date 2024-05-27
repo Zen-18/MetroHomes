@@ -16,9 +16,9 @@ const SendPropertyModal = ({ opened, setOpened }) => {
           <div className="PropertyDetails">
             <u className="line">For Property Details</u>
             <div className="details">
-              - Please provide the exact location of the Property, the
-              facilities in the property (No. of parking space, bedroom and
-              bathroom).
+              - Please provide the exact location of the Property and the
+              facilities available in the property (No. of parking space,
+              bedroom and bathroom).
             </div>
             <div className="details">
               - Please provide a Clear and High quality Picture of the Property.

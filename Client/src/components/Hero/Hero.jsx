@@ -7,7 +7,7 @@ const Hero = () => {
     <section className="hero-wrapper">
       <div className=" flexCenter hero-container">
         <img src="../../public/BG.jpg" alt="" />
-        <div className="quote">
+        <div className="primaryText quote">
           Don't wait to buy real estate. Buy real estate and wait.
         </div>
         {/* left side */}

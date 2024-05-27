@@ -20,10 +20,10 @@ body {
     flex-direction: column;
     align-items: center;
     width: 500px; 
-    margin-top: 4rem;
+    margin-top: -5rem;
     margin-bottom: 10rem;
     background-color: white;
-    height: 630px;
+    height: 600px;
     border-radius: 25px;
   }
 

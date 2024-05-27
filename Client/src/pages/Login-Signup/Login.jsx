@@ -46,16 +46,6 @@ const Login = () => {
             <Link to="/forgot-password">Forgot password?</Link>
           </u>
         </div>
-        <div className="user-type">
-          <label>Role:</label>
-          <select
-            value={userType}
-            onChange={(e) => setUserType(e.target.value)}
-          >
-            <option value="client">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
         <button disabled={isLoading} className="button">
           {isLoading ? "Logging in..." : "Log in"}
         </button>
