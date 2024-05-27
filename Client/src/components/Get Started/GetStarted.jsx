@@ -17,9 +17,7 @@ const GetStarted = () => {
             Lawyer. Then connect with us on{" "}
             <p className="text">metrohomes977@gmail.com</p>
           </span>
-          <button className="button">
-            {/* <a href="mailto:metrohomes977@gmail.com">Send Us your Details</a> */}
-          </button>
+
           <div onClick={handleSendPropertyClick} className="button">
             Send Property
           </div>
